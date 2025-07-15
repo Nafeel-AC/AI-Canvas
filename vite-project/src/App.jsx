@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import BlurText from './components/BlurText';
+import Switch from './components/Switch';
 import './App.css'
 
 function App() {
-  const handleAnimationComplete = () => {
-    console.log('Animation completed!');
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode');
+    return saved ? JSON.parse(saved) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+    document.body.classList.toggle('dark-mode', isDarkMode);
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
   };
 
   return (
@@ -24,9 +34,10 @@ function App() {
             <a href="#" className="nav-link">Clients</a>
           </div>
           <div className="nav-cta">
+            <Switch isDark={isDarkMode} onToggle={toggleDarkMode} />
             <button className="start-project-btn">Start A Project</button>
           </div>
-        </div>
+      </div>
       </nav>
 
       {/* Main Content */}
@@ -42,8 +53,8 @@ function App() {
             <p className="description">
               Interact with AI through text, voice, or drawing.<br />
               Get intelligent responses via text and realistic speech.
-            </p>
-          </div>
+        </p>
+      </div>
           
           <div className="animation-section">
             <DotLottieReact
@@ -71,14 +82,7 @@ function App() {
           
           <div className="about-content">
             <p className="about-subtitle">About Us</p>
-            <BlurText
-              text="Transforming Ideas into Digital Reality"
-              delay={150}
-              animateBy="words"
-              direction="top"
-              onAnimationComplete={handleAnimationComplete}
-              className="about-title"
-            />
+            <h2 className="about-title">Transforming Ideas into Digital Reality</h2>
             <p className="about-description">
               AI Canvas revolutionizes how you interact with artificial intelligence. 
               Our multimodal platform combines the power of text, voice, and visual input 
@@ -143,6 +147,77 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Newsletter Section */}
+      <section className="newsletter-section">
+        <div className="newsletter-container">
+          <div className="newsletter-content">
+            <h2 className="newsletter-title">Subscribe to our newsletter</h2>
+            <div className="newsletter-form">
+              <input type="text" placeholder="First name" className="newsletter-input" />
+              <input type="email" placeholder="Email address" className="newsletter-input" />
+              <button className="newsletter-btn">Subscribe Now</button>
+            </div>
+          </div>
+          <div className="newsletter-decoration">
+            <svg className="decoration-curve" viewBox="0 0 200 200" fill="none">
+              <path d="M20 180 Q100 20 180 180" stroke="rgba(255,255,255,0.3)" strokeWidth="3" fill="none"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-container">
+          <div className="footer-main">
+            <div className="footer-brand">
+              <div className="footer-logo">
+                <div className="footer-logo-icon">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="16" fill="#E0755F"/>
+                    <path d="M12 10h8v2h-8v-2zm0 4h8v2h-8v-2zm0 4h6v2h-6v-2z" fill="white"/>
+                  </svg>
+                </div>
+                <span className="footer-logo-text">AI Canvas</span>
+              </div>
+              <p className="footer-description">
+                AI Canvas gives you the blocks and components you need to create 
+                a truly professional AI interaction website.
+              </p>
+            </div>
+            
+            <div className="footer-links">
+              <div className="footer-column">
+                <h3 className="footer-column-title">COMPANY</h3>
+                <ul className="footer-links-list">
+                  <li><a href="#" className="footer-link">About</a></li>
+                  <li><a href="#" className="footer-link">Features</a></li>
+                  <li><a href="#" className="footer-link">Works</a></li>
+                </ul>
+              </div>
+              
+              <div className="footer-column">
+                <h3 className="footer-column-title">HELP</h3>
+                <ul className="footer-links-list">
+                  <li><a href="#" className="footer-link">Customer Support</a></li>
+                  <li><a href="#" className="footer-link">Delivery Details</a></li>
+                  <li><a href="#" className="footer-link">Terms & Conditions</a></li>
+                </ul>
+              </div>
+              
+              <div className="footer-column">
+                <h3 className="footer-column-title">RESOURCES</h3>
+                <ul className="footer-links-list">
+                  <li><a href="#" className="footer-link">Free eBooks</a></li>
+                  <li><a href="#" className="footer-link">Development Tutorial</a></li>
+                  <li><a href="#" className="footer-link">How to - Blog</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

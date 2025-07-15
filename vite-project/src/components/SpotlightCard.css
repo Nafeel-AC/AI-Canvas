@@ -1,0 +1,52 @@
+.spotlight-card {
+  position: relative;
+  border-radius: 20px;
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+  overflow: hidden;
+  padding: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(61, 44, 46, 0.15);
+}
+
+.spotlight-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.spotlight-card h3 {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #3D2C2E;
+  margin-bottom: 1rem;
+}
+
+.spotlight-card p {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #4A4A4A;
+  line-height: 1.6;
+}
+
+.spotlight-card .feature-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #E0755F, #F4A261);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+} 

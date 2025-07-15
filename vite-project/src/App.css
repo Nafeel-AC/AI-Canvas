@@ -1,0 +1,619 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Patrick+Hand&family=Saira:ital,wght@0,100..900;1,100..900&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Winky Rough', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  min-height: 100vh;
+  background: #FAF4E5;
+  color: #3D2C2E;
+  overflow-x: hidden;
+}
+
+/* Navigation Styles */
+.navbar {
+  padding: 2rem 0 0;
+  position: relative;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.8rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(61, 44, 46, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 60px;
+  border: 1px solid rgba(244, 162, 97, 0.2);
+  box-shadow: 0 8px 32px rgba(61, 44, 46, 0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #3D2C2E;
+  font-family: 'Winky Rough', sans-serif;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: #4A4A4A;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-family: 'Winky Rough', sans-serif;
+  font-size: 0.95rem;
+  position: relative;
+  padding: 0.4rem 0;
+}
+
+.nav-link:hover {
+  color: #3D2C2E;
+}
+
+.nav-link.active {
+  color: #3D2C2E;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 3px;
+  background: #D16030;
+  border-radius: 2px;
+}
+
+.nav-cta {
+  display: flex;
+  align-items: center;
+}
+
+.start-project-btn {
+  background: linear-gradient(135deg, #E0755F, #D16030);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.6rem;
+  border-radius: 25px;
+  font-family: 'Winky Rough', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(224, 117, 95, 0.3);
+}
+
+.start-project-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(224, 117, 95, 0.4);
+}
+
+/* Main Content Styles */
+.main-content {
+  padding: 5rem 0 4rem;
+  position: relative;
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+}
+
+.content-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.text-section {
+  z-index: 10;
+}
+
+.tagline {
+  color: #4A4A4A;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.main-heading {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  color: #3D2C2E;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.ai-canvas {
+  background: linear-gradient(135deg, #E0755F, #F4A261);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.description {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #4A4A4A;
+  margin-bottom: 3rem;
+  font-family: 'Patrick Hand', cursive;
+  font-weight: 700;
+}
+
+.animation-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.ai-animation {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  transform: scale(1.5) translateX(2%);
+}
+
+/* About Section Styles */
+.about-section {
+  padding: 0.5rem 0 2rem;
+  background: #FAF4E5;
+  position: relative;
+}
+
+.about-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.about-animation dotlottie-wc {
+  transform: scale(1);
+}
+
+.about-content {
+  z-index: 10;
+}
+
+.about-subtitle {
+  color: #E0755F;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.about-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  color: #3D2C2E;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.about-highlight {
+  background: linear-gradient(135deg, #E0755F, #F4A261);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-description {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #4A4A4A;
+  margin-bottom: 3rem;
+  font-family: 'Patrick Hand', cursive;
+  font-weight: 400;
+}
+
+.about-stats {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.stat-item {
+  text-align: left;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #E0755F;
+  margin-bottom: 0.5rem;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #4A4A4A;
+  font-weight: 600;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.about-signature {
+  margin-top: 2rem;
+}
+
+.signature-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #3D2C2E;
+  margin-bottom: 0.5rem;
+  font-family: 'Patrick Hand', cursive;
+  font-style: italic;
+}
+
+.signature-title {
+  font-size: 1rem;
+  color: #4A4A4A;
+  font-weight: 500;
+  font-family: 'Patrick Hand', cursive;
+}
+
+/* Features Section Styles */
+.features-section {
+  padding: 2rem 0 4rem;
+  background: #FAF4E5;
+  position: relative;
+}
+
+.features-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.features-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.features-subtitle {
+  color: #E0755F;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.features-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  color: #3D2C2E;
+  font-family: 'Patrick Hand', cursive;
+  text-align: center;
+  justify-content: center;
+}
+
+.features-highlight {
+  background: linear-gradient(135deg, #E0755F, #F4A261);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feature-card {
+  height: 280px;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(61, 44, 46, 0.15);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  position: relative;
+}
+
+.card-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(224, 117, 95, 0.15), rgba(244, 162, 97, 0.15));
+  border-radius: 20px;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .card-image::before {
+  background: linear-gradient(135deg, rgba(224, 117, 95, 0.25), rgba(244, 162, 97, 0.25));
+}
+
+.card-title-below {
+  color: #3D2C2E;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  font-family: 'Patrick Hand', cursive;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1.5rem 1rem 0;
+  }
+  
+  .nav-container {
+    max-width: 95%;
+    padding: 0.7rem 2rem;
+  }
+  
+  .nav-menu {
+    display: none;
+  }
+  
+  .logo-text {
+    font-size: 1.1rem;
+  }
+  
+  .start-project-btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
+  .main-content {
+    padding: 3rem 0 2rem;
+  }
+  
+  .content-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+    padding: 0 1.5rem;
+    max-width: 1000px;
+  }
+  
+  .ai-animation {
+    max-width: 500px;
+    transform: scale(1);
+  }
+  
+  .main-heading {
+    font-size: 3.5rem;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 1rem 1rem 0;
+  }
+  
+  .nav-container {
+    max-width: 95%;
+    padding: 0.6rem 1.5rem;
+  }
+  
+  .start-project-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .ai-animation {
+    max-width: 400px;
+  }
+  
+  .main-heading {
+    font-size: 2.8rem;
+  }
+  
+  .tagline {
+    font-size: 0.9rem;
+  }
+  
+  .description {
+    font-size: 1.1rem;
+  }
+}
+
+/* Responsive Design for About Section */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 0.5rem 0 2rem;
+  }
+  
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+    padding: 0 0.5rem;
+  }
+  
+  .about-animation dotlottie-wc {
+    transform: scale(1);
+    width: 600px !important;
+    height: 600px !important;
+  }
+  
+  .about-title {
+    font-size: 2.8rem;
+  }
+  
+  .about-description {
+    font-size: 1.1rem;
+  }
+  
+  .about-stats {
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container {
+    padding: 0 0.5rem;
+  }
+  
+  .about-animation dotlottie-wc {
+    width: 450px !important;
+    height: 450px !important;
+  }
+  
+  .about-title {
+    font-size: 2.2rem;
+  }
+  
+  .about-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .stat-item {
+    text-align: center;
+  }
+}
+
+/* Responsive Design for Features Section */
+@media (max-width: 768px) {
+  .features-section {
+    padding: 2rem 0 3rem;
+  }
+  
+  .features-container {
+    padding: 0 1rem;
+  }
+  
+  .features-header {
+    margin-bottom: 3rem;
+  }
+  
+  .features-title {
+    font-size: 2.8rem;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .feature-card {
+    height: 260px;
+  }
+  
+  .card-title-below {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .features-container {
+    padding: 0 1rem;
+  }
+  
+  .features-title {
+    font-size: 2.2rem;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .feature-card {
+    height: auto;
+    min-height: 220px;
+  }
+  
+  .card-title-below {
+    font-size: 1rem;
+  }
+}

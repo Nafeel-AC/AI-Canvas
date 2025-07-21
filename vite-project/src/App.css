@@ -21,6 +21,17 @@ body {
   overflow-x: hidden;
 }
 
+/* Dashboard specific styling */
+.app:has([data-page="dashboard"]) {
+  background: transparent;
+}
+
+/* Hide nav and bottom nav on dashboard */
+.app:has([data-page="dashboard"]) .navbar,
+.app:has([data-page="dashboard"]) .bottom-navbar {
+  display: none !important;
+}
+
 /* Navigation Styles */
 .navbar {
   padding: 2rem 0 0;
@@ -55,6 +66,11 @@ body {
   font-weight: 700;
   color: #3D2C2E;
   font-family: 'Winky Rough', sans-serif;
+  text-decoration: none;
+}
+
+.logo-text:hover {
+  color: #3D2C2E;
 }
 
 .nav-menu {
@@ -82,6 +98,22 @@ body {
   color: #3D2C2E;
 }
 
+/* Button nav links */
+button.nav-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Button footer links */
+button.footer-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+}
+
 .nav-link.active::after {
   content: '';
   position: absolute;
@@ -97,6 +129,39 @@ body {
 .nav-cta {
   display: flex;
   align-items: center;
+  gap: 1rem;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-greeting {
+  color: #3D2C2E;
+  font-family: 'Winky Rough', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.sign-out-btn {
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  color: #E0755F;
+  border: 2px solid #E0755F;
+  border-radius: 30px;
+  font-weight: 600;
+  font-family: 'Winky Rough', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.sign-out-btn:hover {
+  background: #E0755F;
+  color: white;
+  transform: translateY(-2px);
 }
 
 .start-project-btn {
@@ -111,6 +176,8 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(224, 117, 95, 0.3);
+  text-decoration: none;
+  display: inline-block;
 }
 
 .start-project-btn:hover {
@@ -384,7 +451,7 @@ body {
   position: relative;
 }
 
-.card-image::before {
+/* .card-image::before {
   content: '';
   position: absolute;
   top: 0;
@@ -399,7 +466,7 @@ body {
 
 .feature-card:hover .card-image::before {
   background: linear-gradient(135deg, rgba(224, 117, 95, 0.25), rgba(244, 162, 97, 0.25));
-}
+} */
 
 .card-title-below {
   color: #3D2C2E;
@@ -828,6 +895,20 @@ body.dark-mode .start-project-btn {
   color: white;
 }
 
+body.dark-mode .user-greeting {
+  color: #F4E6D7;
+}
+
+body.dark-mode .sign-out-btn {
+  color: #F4A261;
+  border-color: #F4A261;
+}
+
+body.dark-mode .sign-out-btn:hover {
+  background: #F4A261;
+  color: #2C1A0F;
+}
+
 body.dark-mode .tagline {
   color: #F4A261;
 }
@@ -907,11 +988,10 @@ body.dark-mode .feature-card {
 }
 
 body.dark-mode .card-image {
-  filter: brightness(0.7) contrast(0.9);
   position: relative;
 }
 
-body.dark-mode .card-image::after {
+/* body.dark-mode .card-image::after {
   content: '';
   position: absolute;
   top: 0;
@@ -921,7 +1001,7 @@ body.dark-mode .card-image::after {
   background: rgba(26, 22, 18, 0.2);
   border-radius: 20px;
   pointer-events: none;
-}
+} */
 
 body.dark-mode .newsletter-container {
   background: linear-gradient(135deg, #2C1A0F, #1A1612);
@@ -1028,5 +1108,142 @@ body.dark-mode .footer-link:hover {
   
   .nav-cta {
     gap: 0.5rem;
+  }
+}
+
+/* Bottom Navigation Styles */
+.bottom-navbar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(61, 44, 46, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(244, 162, 97, 0.2);
+  z-index: 1000;
+  padding: 0.5rem 0;
+}
+
+.bottom-nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: #9CA3AF;
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  min-width: 60px;
+}
+
+.bottom-nav-item:hover,
+.bottom-nav-item:focus {
+  color: #f4a261;
+  background: rgba(244, 162, 97, 0.1);
+}
+
+.bottom-nav-item svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.bottom-nav-item span {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1;
+}
+
+/* Dark Mode Bottom Nav */
+body.dark-mode .bottom-navbar {
+  background: rgba(26, 26, 26, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .bottom-nav-item {
+  color: #9CA3AF;
+}
+
+body.dark-mode .bottom-nav-item:hover,
+body.dark-mode .bottom-nav-item:focus {
+  color: #f4a261;
+  background: rgba(244, 162, 97, 0.15);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  /* Hide desktop navigation menu on mobile */
+  .nav-menu {
+    display: none;
+  }
+  
+  /* Show bottom navbar on mobile */
+  .bottom-navbar {
+    display: block;
+  }
+  
+  /* Add bottom padding to app content for bottom navbar */
+  .app {
+    padding-bottom: 80px;
+  }
+  
+  /* Hide main animation on mobile */
+  .animation-section {
+    display: none;
+  }
+  
+  /* Adjust main content layout for mobile */
+  .content-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  /* Adjust about animation for mobile */
+  .about-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .about-animation dotlottie-wc {
+    width: 300px !important;
+    height: 300px !important;
+  }
+  
+  /* Adjust about section layout for mobile */
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  /* Improve mobile navbar spacing */
+  .nav-container {
+    padding: 0.8rem 1.5rem;
+  }
+  
+  /* Adjust navigation for mobile */
+  .navbar {
+    padding: 1rem 0 0;
+  }
+  
+  /* Make sure logo and sign in button are still visible */
+  .nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 }

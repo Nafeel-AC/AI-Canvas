@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Switch from './components/Switch';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import FAQPage from './pages/FAQPage';
+import ProfilePage from './pages/ProfilePage';
+import DashboardPage from './pages/DashboardPage';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import './App.css'
 
-function App() {
+function Navbar() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode');
     return saved ? JSON.parse(saved) : false;
   });
+
+  const { user, signOut, loading } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
@@ -18,207 +28,110 @@ function App() {
     setIsDarkMode(!isDarkMode);
   };
 
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
+
   return (
-    <div className="app">
+    <>
       {/* Navigation Header */}
       <nav className="navbar">
         <div className="nav-container">
           <div className="logo">
-            <span className="logo-text">AI Canvas</span>
+            <Link to="/" className="logo-text">AI Canvas</Link>
           </div>
           <div className="nav-menu">
-            <a href="#" className="nav-link active">Home</a>
-            <a href="#" className="nav-link">About</a>
-            <a href="#" className="nav-link">Services</a>
-            <a href="#" className="nav-link">Process</a>
-            <a href="#" className="nav-link">Clients</a>
+            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/faq" className="nav-link">FAQ</Link>
+            {user && <Link to="/dashboard" className="nav-link">Dashboard</Link>}
           </div>
           <div className="nav-cta">
             <Switch isDark={isDarkMode} onToggle={toggleDarkMode} />
-            <button className="start-project-btn">Start A Project</button>
+            {user ? (
+              <Link to="/profile" className="start-project-btn">Profile</Link>
+            ) : (
+              <Link to="/login" className="start-project-btn">Sign In</Link>
+            )}
           </div>
-      </div>
+        </div>
       </nav>
+    </>
+  )
+}
 
-      {/* Main Content */}
-      <main className="main-content">
-        <div className="content-container">
-          <div className="text-section">
-            <p className="tagline">MULTIMODAL AI INTERACTION PLATFORM</p>
-            <h1 className="main-heading">
-              Experience<br />
-              The Magic Of<br />
-              <span className="ai-canvas">AI Canvas!</span>
-            </h1>
-            <p className="description">
-              Interact with AI through text, voice, or drawing.<br />
-              Get intelligent responses via text and realistic speech.
-        </p>
-      </div>
-          
-          <div className="animation-section">
-            <DotLottieReact
-              src="https://lottie.host/36e46a2b-188d-4844-a1e9-597d94e2baab/mdmqBwL9kR.lottie"
-              loop={false}
-              autoplay
-              className="ai-animation"
-            />
-          </div>
-        </div>
-      </main>
-
-      {/* About Section */}
-      <section className="about-section">
-        <div className="about-container">
-          <div className="about-animation">
-            <dotlottie-wc 
-              src="https://lottie.host/9e6b2324-3d56-4018-9089-4d36638ad4fa/BVTXsAOh1x.lottie" 
-              style={{width: '700px', height: '700px'}} 
-              speed="1"
-              loop={false}
-              autoplay>
-            </dotlottie-wc>
-          </div>
-          
-          <div className="about-content">
-            <p className="about-subtitle">About Us</p>
-            <h2 className="about-title">Transforming Ideas into Digital Reality</h2>
-            <p className="about-description">
-              AI Canvas revolutionizes how you interact with artificial intelligence. 
-              Our multimodal platform combines the power of text, voice, and visual input 
-              to create an intuitive and immersive AI experience.
-            </p>
-            
-            <div className="about-stats">
-              <div className="stat-item">
-                <div className="stat-number">15+</div>
-                <div className="stat-label">AI Models</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number">10000+</div>
-                <div className="stat-label">Active Users</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number">99%</div>
-                <div className="stat-label">User Satisfaction</div>
-              </div>
-            </div>
-            
-            <div className="about-signature">
-              <div className="signature-name">Alex Johnson</div>
-              <div className="signature-title">Alex Johnson • Founder & CEO</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="features-section">
-        <div className="features-container">
-          <div className="features-header">
-            <p className="features-subtitle">Our Features</p>
-            <h2 className="features-title">
-              Powerful AI Capabilities<br />
-              at Your <span className="features-highlight">Fingertips</span>
-            </h2>
-          </div>
-          
-          <div className="features-grid">
-            <div className="feature-item">
-              <div className="feature-card">
-                <div className="card-image" style={{backgroundImage: "url('Tiny people near phone with voice assistant on screen.jpg')"}}></div>
-              </div>
-              <h3 className="card-title-below">Voice Interaction</h3>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-card">
-                <div className="card-image" style={{backgroundImage: "url('13038.jpg')"}}></div>
-              </div>
-              <h3 className="card-title-below">Canvas Drawing</h3>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-card">
-                <div className="card-image" style={{backgroundImage: "url('20945879.jpg')"}}></div>
-              </div>
-              <h3 className="card-title-below">Text Chat</h3>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="newsletter-section">
-        <div className="newsletter-container">
-          <div className="newsletter-content">
-            <h2 className="newsletter-title">Subscribe to our newsletter</h2>
-            <div className="newsletter-form">
-              <input type="text" placeholder="First name" className="newsletter-input" />
-              <input type="email" placeholder="Email address" className="newsletter-input" />
-              <button className="newsletter-btn">Subscribe Now</button>
-            </div>
-          </div>
-          <div className="newsletter-decoration">
-            <svg className="decoration-curve" viewBox="0 0 200 200" fill="none">
-              <path d="M20 180 Q100 20 180 180" stroke="rgba(255,255,255,0.3)" strokeWidth="3" fill="none"/>
+function BottomNavbar() {
+  const { user } = useAuth();
+  
+  return (
+    <nav className="bottom-navbar">
+      <div className="bottom-nav-container">
+        <Link to="/" className="bottom-nav-item">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+          </svg>
+          <span>Home</span>
+        </Link>
+        <Link to="/faq" className="bottom-nav-item">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+          </svg>
+          <span>FAQ</span>
+        </Link>
+        {user && (
+          <Link to="/dashboard" className="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
             </svg>
-          </div>
-        </div>
-      </section>
+            <span>Dashboard</span>
+          </Link>
+        )}
+        {user ? (
+          <Link to="/profile" className="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <span>Profile</span>
+          </Link>
+        ) : (
+          <Link to="/login" className="bottom-nav-item">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v12z"/>
+            </svg>
+            <span>Sign In</span>
+          </Link>
+        )}
+      </div>
+    </nav>
+  );
+}
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-main">
-            <div className="footer-brand">
-              <div className="footer-logo">
-                <div className="footer-logo-icon">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="16" fill="#E0755F"/>
-                    <path d="M12 10h8v2h-8v-2zm0 4h8v2h-8v-2zm0 4h6v2h-6v-2z" fill="white"/>
-                  </svg>
-                </div>
-                <span className="footer-logo-text">AI Canvas</span>
-              </div>
-              <p className="footer-description">
-                AI Canvas gives you the blocks and components you need to create 
-                a truly professional AI interaction website.
-              </p>
-            </div>
-            
-            <div className="footer-links">
-              <div className="footer-column">
-                <h3 className="footer-column-title">COMPANY</h3>
-                <ul className="footer-links-list">
-                  <li><a href="#" className="footer-link">About</a></li>
-                  <li><a href="#" className="footer-link">Features</a></li>
-                  <li><a href="#" className="footer-link">Works</a></li>
-                </ul>
-              </div>
-              
-              <div className="footer-column">
-                <h3 className="footer-column-title">HELP</h3>
-                <ul className="footer-links-list">
-                  <li><a href="#" className="footer-link">Customer Support</a></li>
-                  <li><a href="#" className="footer-link">Delivery Details</a></li>
-                  <li><a href="#" className="footer-link">Terms & Conditions</a></li>
-                </ul>
-              </div>
-              
-              <div className="footer-column">
-                <h3 className="footer-column-title">RESOURCES</h3>
-                <ul className="footer-links-list">
-                  <li><a href="#" className="footer-link">Free eBooks</a></li>
-                  <li><a href="#" className="footer-link">Development Tutorial</a></li>
-                  <li><a href="#" className="footer-link">How to - Blog</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+function AppContent() {
+  const { user } = useAuth();
+  
+  return (
+    <div className="app">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/dashboard" element={user ? <DashboardPage /> : <LoginPage />} />
+      </Routes>
+      <BottomNavbar />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AuthProvider>
   )
 }
 
